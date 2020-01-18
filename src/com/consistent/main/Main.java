@@ -9,11 +9,108 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 import com.consistent.models.Rates;
+//import com.liferay.portal.kernel.util.ParamUtil;
+//import com.liferay.portal.kernel.util.WebKeys;
+//import com.liferay.portal.theme.ThemeDisplay;
 
 public class Main {
 	
 	public static void main(String args[]){
-		 try {
+		String path = "/92698/92722/92805/92933/";
+		String [] diag = path.split("/");
+		System.out.println("Tamaño: "+ diag.length);
+	}
+	public static final void getRate() throws IOException
+	 {
+		 Rates rates = new Rates();
+		 List<Rates> rate = rates.getListRates();
+		 
+			try {
+				 StringWriter stringWriter = new StringWriter();
+		         XMLOutputFactory xMLOutputFactory = XMLOutputFactory.newInstance();
+		         XMLStreamWriter xMLStreamWriter = xMLOutputFactory.createXMLStreamWriter(stringWriter);
+		         
+		         xMLStreamWriter.writeStartDocument();
+		         
+				for (Rates promocion: rate) {
+					xMLStreamWriter.writeStartElement("rate");
+						xMLStreamWriter.writeStartElement("guid");
+						xMLStreamWriter.writeCharacters(promocion.getGuid());
+						xMLStreamWriter.writeEndElement();
+						
+						xMLStreamWriter.writeStartElement("code");
+						xMLStreamWriter.writeCharacters(promocion.getCode());
+						xMLStreamWriter.writeEndElement();
+						
+						xMLStreamWriter.writeStartElement("name");
+						xMLStreamWriter.writeCharacters(promocion.getName());
+						xMLStreamWriter.writeEndElement();
+						
+						xMLStreamWriter.writeStartElement("title");
+						xMLStreamWriter.writeCharacters(promocion.getTitle());
+						xMLStreamWriter.writeEndElement();
+						
+						xMLStreamWriter.writeStartElement("language");
+						xMLStreamWriter.writeCharacters(promocion.getLanguage());
+						xMLStreamWriter.writeEndElement();
+						
+						xMLStreamWriter.writeStartElement("keyword");
+						xMLStreamWriter.writeCharacters(promocion.getKeyword());
+						xMLStreamWriter.writeEndElement();
+						
+						xMLStreamWriter.writeStartElement("channel");
+						xMLStreamWriter.writeCharacters(promocion.getChannel());
+						xMLStreamWriter.writeEndElement();
+						
+						xMLStreamWriter.writeStartElement("shortDescription");
+						xMLStreamWriter.writeCharacters(promocion.getShortDescription());
+						xMLStreamWriter.writeEndElement();
+						
+						xMLStreamWriter.writeStartElement("description");
+						xMLStreamWriter.writeCharacters(promocion.getDescription());
+						xMLStreamWriter.writeEndElement();
+						
+						xMLStreamWriter.writeStartElement("order");
+						xMLStreamWriter.writeCharacters(promocion.getOrder());
+						xMLStreamWriter.writeEndElement();
+						
+						xMLStreamWriter.writeStartElement("benefits");
+						xMLStreamWriter.writeCharacters(promocion.getBenefits());
+						xMLStreamWriter.writeEndElement();
+						
+						xMLStreamWriter.writeStartElement("restrictions");
+						xMLStreamWriter.writeCharacters(promocion.getRestrictions());
+						xMLStreamWriter.writeEndElement();
+						
+						xMLStreamWriter.writeStartElement("enddate");
+						xMLStreamWriter.writeCharacters(promocion.getEnddate());
+						xMLStreamWriter.writeEndElement();
+						
+						xMLStreamWriter.writeStartElement("currency");
+						xMLStreamWriter.writeCharacters(promocion.getCurrency());
+						xMLStreamWriter.writeEndElement();
+					xMLStreamWriter.writeEndElement();
+				 }
+				
+					xMLStreamWriter.flush();
+					xMLStreamWriter.close();
+
+		         String xmlString = stringWriter.getBuffer().toString();
+
+		         stringWriter.close();
+
+		         System.out.println(xmlString);
+				
+					
+			} catch (XMLStreamException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		 
+	 }
+	
+	public void parse() {
+ try {
 			 
 			 Rates rates = new Rates();
 			 List<Rates> rate = rates.getListRates();
@@ -313,97 +410,7 @@ public class Main {
 	      } catch (IOException e) {
 	         e.printStackTrace();
 	      }
-		 
-		 
 	}
-	public static final void getRate() throws IOException
-	 {
-		 Rates rates = new Rates();
-		 List<Rates> rate = rates.getListRates();
-		 
-			try {
-				 StringWriter stringWriter = new StringWriter();
-		         XMLOutputFactory xMLOutputFactory = XMLOutputFactory.newInstance();
-		         XMLStreamWriter xMLStreamWriter = xMLOutputFactory.createXMLStreamWriter(stringWriter);
-		         
-		         xMLStreamWriter.writeStartDocument();
-		         
-				for (Rates promocion: rate) {
-					xMLStreamWriter.writeStartElement("rate");
-						xMLStreamWriter.writeStartElement("guid");
-						xMLStreamWriter.writeCharacters(promocion.getGuid());
-						xMLStreamWriter.writeEndElement();
-						
-						xMLStreamWriter.writeStartElement("code");
-						xMLStreamWriter.writeCharacters(promocion.getCode());
-						xMLStreamWriter.writeEndElement();
-						
-						xMLStreamWriter.writeStartElement("name");
-						xMLStreamWriter.writeCharacters(promocion.getName());
-						xMLStreamWriter.writeEndElement();
-						
-						xMLStreamWriter.writeStartElement("title");
-						xMLStreamWriter.writeCharacters(promocion.getTitle());
-						xMLStreamWriter.writeEndElement();
-						
-						xMLStreamWriter.writeStartElement("language");
-						xMLStreamWriter.writeCharacters(promocion.getLanguage());
-						xMLStreamWriter.writeEndElement();
-						
-						xMLStreamWriter.writeStartElement("keyword");
-						xMLStreamWriter.writeCharacters(promocion.getKeyword());
-						xMLStreamWriter.writeEndElement();
-						
-						xMLStreamWriter.writeStartElement("channel");
-						xMLStreamWriter.writeCharacters(promocion.getChannel());
-						xMLStreamWriter.writeEndElement();
-						
-						xMLStreamWriter.writeStartElement("shortDescription");
-						xMLStreamWriter.writeCharacters(promocion.getShortDescription());
-						xMLStreamWriter.writeEndElement();
-						
-						xMLStreamWriter.writeStartElement("description");
-						xMLStreamWriter.writeCharacters(promocion.getDescription());
-						xMLStreamWriter.writeEndElement();
-						
-						xMLStreamWriter.writeStartElement("order");
-						xMLStreamWriter.writeCharacters(promocion.getOrder());
-						xMLStreamWriter.writeEndElement();
-						
-						xMLStreamWriter.writeStartElement("benefits");
-						xMLStreamWriter.writeCharacters(promocion.getBenefits());
-						xMLStreamWriter.writeEndElement();
-						
-						xMLStreamWriter.writeStartElement("restrictions");
-						xMLStreamWriter.writeCharacters(promocion.getRestrictions());
-						xMLStreamWriter.writeEndElement();
-						
-						xMLStreamWriter.writeStartElement("enddate");
-						xMLStreamWriter.writeCharacters(promocion.getEnddate());
-						xMLStreamWriter.writeEndElement();
-						
-						xMLStreamWriter.writeStartElement("currency");
-						xMLStreamWriter.writeCharacters(promocion.getCurrency());
-						xMLStreamWriter.writeEndElement();
-					xMLStreamWriter.writeEndElement();
-				 }
-				
-					xMLStreamWriter.flush();
-					xMLStreamWriter.close();
-
-		         String xmlString = stringWriter.getBuffer().toString();
-
-		         stringWriter.close();
-
-		         System.out.println(xmlString);
-				
-					
-			} catch (XMLStreamException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		 
-	 }
 	 
 	
 }
